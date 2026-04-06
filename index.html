@@ -663,7 +663,7 @@
 </footer>
 
 <script>
-  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
   const WEEKLY_EVENTS = [
     { day: 0, name: 'High Tide Coffee',     city: 'Laguna Niguel',  time: '4:00 PM',  type: 'weekly' },
@@ -708,7 +708,8 @@
       grid.appendChild(h);
     });
 
-    var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    var dayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+    var firstDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
     var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     var today = new Date();
 
