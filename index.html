@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South OC Trivia Guide</title>
+  <meta name="description" content="Every weekly pub trivia night in South Orange County — San Clemente, Dana Point, Laguna Beach, Laguna Niguel, Mission Viejo and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F5F0E8;
+      --ink: #1A1410;
+      --gold: #C4952A;
+      --rust: #B84C2A;
+      --muted: #6B6258;
+      --card-bg: #FFFDF8;
+      --border: rgba(26,20,16,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--ink);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(196,149,42,0.08) 39px, rgba(196,149,42,0.08) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(196,149,42,0.08) 39px, rgba(196,149,42,0.08) 40px);
+    }
+    .hero-badge {
+      display: inline-block;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      margin-top: 1.25rem;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+    .hero-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 2rem auto 0;
+      position: relative;
+    }
+
+    /* ── NAV ── */
+    .top-nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .view-toggle {
+      display: flex;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .view-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-right: 1px solid var(--border);
+      transition: all 0.15s;
+    }
+    .view-btn:last-child { border-right: none; }
+    .view-btn.active { background: var(--ink); color: var(--gold); }
+
+    .day-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .day-pill {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 100px;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .day-pill:hover, .day-pill.active {
+      background: var(--ink);
+      color: var(--gold);
+      border-color: var(--ink);
+    }
+    .day-pills.hidden { display: none; }
+
+    /* ── SECTION ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── LIST VIEW ── */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .venue-card {
+      background: var(--card-bg);
+      padding: 1.5rem 1.25rem;
+      transition: background 0.15s;
+    }
+    .venue-card:hover { background: #fff; }
+    .venue-card[style*="none"] { display: none; }
+
+    .venue-day {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.4rem;
+    }
+    .venue-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      line-height: 1.25;
+    }
+    .venue-city { font-size: 12px; color: var(--muted); margin-bottom: 0.6rem; }
+    .venue-time { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
+    .venue-host { font-size: 11px; color: var(--muted); margin-bottom: 0.65rem; }
+    .venue-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .tag-free    { background: #EAF3DE; color: #3B6D11; }
+    .tag-brewery { background: #E6F1FB; color: #185FA5; }
+    .tag-coffee  { background: #FAEEDA; color: #854F0B; }
+    .tag-bar     { background: #FBEAF0; color: #993556; }
+    .tag-monthly { background: #F1EFE8; color: #5F5E5A; }
+    .venue-links { margin-top: 0.65rem; display: flex; gap: 10px; }
+    .venue-link {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(196,149,42,0.3);
+      padding-bottom: 1px;
+      transition: border-color 0.15s;
+    }
+    .venue-link:hover { border-color: var(--gold); }
+
+    /* ── CALENDAR VIEW ── */
+    #cal-view { display: none; }
+
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+    .cal-month {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .cal-arrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-radius: 3px;
+    }
+    .cal-arrow:hover { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      border: 1px solid var(--border);
+      background: var(--border);
+      gap: 1px;
+    }
+    .cal-header {
+      background: var(--ink);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 6px;
+      text-align: center;
+    }
+    .cal-day {
+      background: var(--card-bg);
+      padding: 10px 8px;
+      min-height: 140px;
+    }
+    .cal-day.empty { background: rgba(245,240,232,0.5); }
+    .cal-day.today { background: #fff; box-shadow: inset 0 0 0 2px var(--gold); }
+    .cal-day-num {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .cal-event {
+      background: #EDE8DF;
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      border-radius: 3px;
+      line-height: 1.35;
+      cursor: default;
+      border-left: 2px solid var(--ink);
+    }
+    .cal-event .ev-time  { color: var(--muted); font-size: 9px; display: block; }
+    .cal-event .ev-name  { color: var(--ink); display: block; font-weight: 500; }
+    .cal-event .ev-city  { color: var(--muted); font-size: 9px; display: block; }
+    .cal-event.ev-gold   { background: #FDF3DC; border-left-color: var(--gold); }
+    .cal-event.ev-gold .ev-time { color: #8A6415; }
+    .cal-event.ev-gold .ev-name { color: #5C4010; }
+    .cal-event.ev-gold .ev-city { color: #8A6415; }
+
+    .cal-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 1rem;
+      font-size: 11px;
+      color: var(--muted);
+      align-items: center;
+    }
+    .leg-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    /* ── HOSTS (dark section) ── */
+    .dark-section { background: #1A1410; }
+    .dark-section .section-label { color: var(--gold); }
+    .dark-section .section-title { color: #F0E8DC; border-color: rgba(255,255,255,0.1); }
+
+    .host-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .host-card {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      padding: 1.25rem;
+    }
+    .host-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .host-detail { font-size: 12px; color: #C8BFB4; line-height: 1.6; }
+    .host-link {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(196,149,42,0.4);
+    }
+    .host-link:hover { border-color: var(--gold); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-body { font-size: 1rem; line-height: 1.8; color: var(--muted); }
+    .about-body strong { color: var(--ink); font-weight: 500; }
+    .about-body p + p { margin-top: 1rem; }
+
+    .submit-box { background: var(--ink); padding: 2rem 1.5rem; }
+    .submit-box strong {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: #F0E8DC;
+      margin-bottom: 0.5rem;
+    }
+    .submit-box p { color: #C8BFB4; font-size: 0.9rem; line-height: 1.7; }
+    .submit-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .submit-btn:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--ink);
+      padding: 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: #7A6E66;
+      letter-spacing: 0.05em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer span { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cal-day { min-height: 90px; padding: 6px 4px; }
+      .cal-event { font-size: 9px; padding: 3px 4px; }
+      .top-nav { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">South Orange County</div>
+  <h1>Trivia <em>Nights</em><br>Guide</h1>
+  <p class="hero-sub">Every weekly pub quiz from San Clemente to Laguna Hills — in one place.</p>
+  <div class="hero-rule"></div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="top-nav">
+  <div class="view-toggle">
+    <button class="view-btn active" id="btn-list" onclick="switchView('list')">List</button>
+    <button class="view-btn" id="btn-cal" onclick="switchView('cal')">Calendar</button>
+  </div>
+  <div class="day-pills" id="day-pills">
+    <button class="day-pill active" onclick="filterDay('all', this)">All nights</button>
+    <button class="day-pill" onclick="filterDay('sunday', this)">Sunday</button>
+    <button class="day-pill" onclick="filterDay('tuesday', this)">Tuesday</button>
+    <button class="day-pill" onclick="filterDay('wednesday', this)">Wednesday</button>
+    <button class="day-pill" onclick="filterDay('thursday', this)">Thursday</button>
+  </div>
+</nav>
+
+<!-- LIST VIEW -->
+<div id="list-view">
+  <div class="section">
+    <p class="section-label">The full schedule</p>
+    <h2 class="section-title">Where to play</h2>
+    <div class="venue-grid" id="venue-grid">
+
+      <div class="venue-card" data-day="sunday">
+        <div class="venue-day">Sunday</div>
+        <div class="venue-name">High Tide Coffee</div>
+        <div class="venue-city">Laguna Niguel</div>
+        <div class="venue-time">4:00 PM</div>
+        <div class="venue-host">Thinky Drinky Trivia</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-coffee">Coffee</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/hightidecoffeeco/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="tuesday">
+        <div class="venue-day">Tuesday</div>
+        <div class="venue-name">OC Local Taproom</div>
+        <div class="venue-city">Laguna Niguel</div>
+        <div class="venue-time">6:30 PM</div>
+        <div class="venue-host">Thinky Drinky Trivia</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-bar">Taproom</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/oclocaltaproom/" target="_blank" rel="noopener">Instagram</a>
+          <a class="venue-link" href="https://oclocaltaproom.com" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="tuesday">
+        <div class="venue-day">Tuesday</div>
+        <div class="venue-name">Selma's Chicago Pizzeria</div>
+        <div class="venue-city">Rancho Santa Margarita</div>
+        <div class="venue-time">6:00 PM</div>
+        <div class="venue-host">Geeks Who Drink</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-bar">Bar</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">Geeks Who Drink</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="tuesday">
+        <div class="venue-day">Tuesday</div>
+        <div class="venue-name">Wigz Sandwich Shop</div>
+        <div class="venue-city">Laguna Beach</div>
+        <div class="venue-time">Evenings</div>
+        <div class="venue-host">King Trivia</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-bar">Restaurant</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://kingtrivia.com" target="_blank" rel="noopener">King Trivia</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="wednesday">
+        <div class="venue-day">Wednesday</div>
+        <div class="venue-name">Los Molinos Beer Co.</div>
+        <div class="venue-city">San Clemente</div>
+        <div class="venue-time">6:30 PM</div>
+        <div class="venue-host">Little Witch Presents</div>
+        <div class="venue-tags">
+          <span class="tag tag-brewery">Brewery</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/losmolinosbeer/" target="_blank" rel="noopener">Instagram</a>
+          <a class="venue-link" href="https://losmolinosbeer.com" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="wednesday">
+        <div class="venue-day">Wednesday</div>
+        <div class="venue-name">Delahunt Tap Room</div>
+        <div class="venue-city">Dana Point</div>
+        <div class="venue-time">Wednesdays</div>
+        <div class="venue-host">Venue-run</div>
+        <div class="venue-tags">
+          <span class="tag tag-brewery">Brewery</span>
+          <span class="tag tag-free">Free</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/delahuntbrewing/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="wednesday">
+        <div class="venue-day">Wednesday</div>
+        <div class="venue-name">Left Coast Tasting Room</div>
+        <div class="venue-city">San Clemente</div>
+        <div class="venue-time">7:00–9:00 PM</div>
+        <div class="venue-host">Geeks Who Drink</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-brewery">Brewery</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">Geeks Who Drink</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="thursday">
+        <div class="venue-day">Thursday</div>
+        <div class="venue-name">Station Craft Taproom</div>
+        <div class="venue-city">San Clemente</div>
+        <div class="venue-time">Evenings</div>
+        <div class="venue-host">Venue-run</div>
+        <div class="venue-tags">
+          <span class="tag tag-free">Free</span>
+          <span class="tag tag-brewery">Brewery</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://sc.stationcraft.com" target="_blank" rel="noopener">Website</a>
+          <a class="venue-link" href="https://www.instagram.com/stationcraftsc/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="thursday">
+        <div class="venue-day">Thursday</div>
+        <div class="venue-name">Dry Society</div>
+        <div class="venue-city">Mission Viejo</div>
+        <div class="venue-time">Evenings</div>
+        <div class="venue-host">King Trivia</div>
+        <div class="venue-tags">
+          <span class="tag tag-bar">Bar</span>
+          <span class="tag tag-free">Free</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://kingtrivia.com" target="_blank" rel="noopener">King Trivia</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="varies">
+        <div class="venue-day">Monthly</div>
+        <div class="venue-name">Dana Point Ale House</div>
+        <div class="venue-city">Dana Point</div>
+        <div class="venue-time">Check Instagram</div>
+        <div class="venue-host">Venue-run</div>
+        <div class="venue-tags">
+          <span class="tag tag-monthly">Monthly</span>
+          <span class="tag tag-bar">Bar</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/danapointalehouse/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="venue-card" data-day="varies">
+        <div class="venue-day">Check schedule</div>
+        <div class="venue-name">Docent Brewing</div>
+        <div class="venue-city">SJC · San Clemente · Laguna Hills</div>
+        <div class="venue-time">Varies by location</div>
+        <div class="venue-host">Venue-run</div>
+        <div class="venue-tags">
+          <span class="tag tag-brewery">Brewery</span>
+          <span class="tag tag-free">Free</span>
+        </div>
+        <div class="venue-links">
+          <a class="venue-link" href="https://www.instagram.com/docentbrewing/" target="_blank" rel="noopener">Instagram</a>
+          <a class="venue-link" href="https://docentbrewing.com" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+
+    </div><!-- /venue-grid -->
+  </div><!-- /section -->
+</div><!-- /list-view -->
+
+<!-- CALENDAR VIEW -->
+<div id="cal-view">
+  <div class="section">
+    <div class="cal-nav">
+      <button class="cal-arrow" onclick="changeMonth(-1)">&#8592; Prev</button>
+      <div class="cal-month" id="cal-month-label"></div>
+      <button class="cal-arrow" onclick="changeMonth(1)">Next &#8594;</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-legend">
+      <span>
+        <span class="leg-dot" style="background:#EDE8DF; border-left: 2px solid #1A1410;"></span>
+        Weekly recurring
+      </span>
+      <span>
+        <span class="leg-dot" style="background:#FDF3DC; border-left: 2px solid #C4952A;"></span>
+        Monthly / check schedule
+      </span>
+      <span>Today is outlined in gold</span>
+    </div>
+  </div>
+</div>
+
+<!-- HOSTS SECTION -->
+<div class="dark-section">
+  <div class="section" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <p class="section-label">The hosts behind the mic</p>
+    <h2 class="section-title">Trivia companies</h2>
+    <div class="host-row">
+      <div class="host-card">
+        <div class="host-name">Thinky Drinky</div>
+        <div class="host-detail">QR code format. OC Local Taproom (Tues) + High Tide Coffee (Sun). Prizes for 1st–3rd place.</div>
+        <a class="host-link" href="https://www.thinkydrinkytrivia.com" target="_blank" rel="noopener">thinkydrinkytrivia.com</a>
+      </div>
+      <div class="host-card">
+        <div class="host-name">King Trivia</div>
+        <div class="host-detail">Wigz Laguna Beach (Tues) + Dry Society Mission Viejo (Thurs).</div>
+        <a class="host-link" href="https://kingtrivia.com" target="_blank" rel="noopener">kingtrivia.com</a>
+      </div>
+      <div class="host-card">
+        <div class="host-name">Geeks Who Drink</div>
+        <div class="host-detail">Selma's RSM (Tues) + Left Coast SC (Wed). Classic 8-round pub format.</div>
+        <a class="host-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">geekswhodrink.com</a>
+      </div>
+      <div class="host-card">
+        <div class="host-name">Little Witch Presents</div>
+        <div class="host-detail">Los Molinos Beer Co. every Wednesday at 6:30 PM. Championship rounds available.</div>
+        <a class="host-link" href="https://www.kleinahexa.com/little-witch-presents" target="_blank" rel="noopener">Schedule</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT / SUBMIT -->
+<div class="section">
+  <p class="section-label">About this guide</p>
+  <h2 class="section-title">Keep the list honest</h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>Trivia schedules change constantly — venues swap nights, hosts go on hiatus during big sports seasons, and new spots pop up without much fanfare.</p>
+      <p>This guide covers <strong>San Clemente, Dana Point, San Juan Capistrano, Laguna Beach, Laguna Niguel, Mission Viejo, Rancho Santa Margarita,</strong> and surrounding South OC communities.</p>
+      <p>Each listing shows the last known schedule. Always confirm with the venue's Instagram before heading out — it's the most reliable real-time source for cancellations and theme nights.</p>
+    </div>
+    <div class="submit-box">
+      <strong>Know something we don't?</strong>
+      <p>If your local spot runs trivia and isn't listed — or if a schedule here is out of date — let us know. We update this list weekly.</p>
+      <a class="submit-btn" href="mailto:hello@southoctrivia.com">Submit a venue &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>South OC Trivia Guide</span> &nbsp;&middot;&nbsp; Last updated April 2026 &nbsp;&middot;&nbsp; Always verify with the venue before you go
+</footer>
+
+<script>
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  const WEEKLY_EVENTS = [
+    { day: 0, name: 'High Tide Coffee',     city: 'Laguna Niguel',  time: '4:00 PM',  type: 'weekly' },
+    { day: 2, name: 'OC Local Taproom',     city: 'Laguna Niguel',  time: '6:30 PM',  type: 'weekly' },
+    { day: 2, name: "Selma's Pizzeria",     city: 'Rancho SM',      time: '6:00 PM',  type: 'weekly' },
+    { day: 2, name: 'Wigz Sandwich Shop',   city: 'Laguna Beach',   time: 'Evening',  type: 'weekly' },
+    { day: 3, name: 'Los Molinos Beer',     city: 'San Clemente',   time: '6:30 PM',  type: 'weekly' },
+    { day: 3, name: 'Delahunt Tap Room',    city: 'Dana Point',     time: 'Evening',  type: 'weekly' },
+    { day: 3, name: 'Left Coast Tasting',   city: 'San Clemente',   time: '7:00 PM',  type: 'weekly' },
+    { day: 4, name: 'Station Craft',        city: 'San Clemente',   time: 'Evening',  type: 'weekly' },
+    { day: 4, name: 'Dry Society',          city: 'Mission Viejo',  time: 'Evening',  type: 'weekly' },
+  ];
+
+  let currentYear, currentMonth;
+
+  function initCal() {
+    const now = new Date();
+    currentYear = now.getFullYear();
+    currentMonth = now.getMonth();
+    renderCal();
+  }
+
+  function changeMonth(dir) {
+    currentMonth += dir;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+    renderCal();
+  }
+
+  function renderCal() {
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('cal-month-label').textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+    const grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    DAYS.forEach(function(d) {
+      var h = document.createElement('div');
+      h.className = 'cal-header';
+      h.textContent = d;
+      grid.appendChild(h);
+    });
+
+    var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    var today = new Date();
+
+    for (var i = 0; i < firstDay; i++) {
+      var empty = document.createElement('div');
+      empty.className = 'cal-day empty';
+      grid.appendChild(empty);
+    }
+
+    for (var d = 1; d <= daysInMonth; d++) {
+      var cellDate = new Date(currentYear, currentMonth, d);
+      var dow = cellDate.getDay();
+      var isToday = today.getFullYear() === currentYear && today.getMonth() === currentMonth && today.getDate() === d;
+
+      var cell = document.createElement('div');
+      cell.className = 'cal-day' + (isToday ? ' today' : '');
+
+      var num = document.createElement('span');
+      num.className = 'cal-day-num';
+      num.textContent = d;
+      cell.appendChild(num);
+
+      WEEKLY_EVENTS.filter(function(e) { return e.day === dow; }).forEach(function(e) {
+        var ev = document.createElement('div');
+        ev.className = 'cal-event';
+        ev.innerHTML = '<span class="ev-time">' + e.time + '</span><span class="ev-name">' + e.name + '</span><span class="ev-city">' + e.city + '</span>';
+        cell.appendChild(ev);
+      });
+
+      // Dana Point Ale House on first Friday of each month
+      if (dow === 5 && d <= 7) {
+        var ev2 = document.createElement('div');
+        ev2.className = 'cal-event ev-gold';
+        ev2.innerHTML = '<span class="ev-time">Check IG</span><span class="ev-name">Dana Pt Ale House</span><span class="ev-city">Monthly</span>';
+        cell.appendChild(ev2);
+      }
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function switchView(view) {
+    document.getElementById('list-view').style.display = view === 'list' ? 'block' : 'none';
+    document.getElementById('cal-view').style.display  = view === 'cal'  ? 'block' : 'none';
+    document.getElementById('btn-list').classList.toggle('active', view === 'list');
+    document.getElementById('btn-cal').classList.toggle('active',  view === 'cal');
+    document.getElementById('day-pills').classList.toggle('hidden', view === 'cal');
+    if (view === 'cal') initCal();
+  }
+
+  function filterDay(day, btn) {
+    document.querySelectorAll('.day-pill').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.venue-card').forEach(function(card) {
+      card.style.display = (day === 'all' || card.dataset.day === day) ? 'block' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
