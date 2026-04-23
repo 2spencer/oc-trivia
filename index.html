@@ -3,802 +3,548 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OC Trivia Tracker — Orange County Pub Quiz & Trivia Nights</title>
+  <title>OC Trivia Tracker — Orange County Pub Quiz &amp; Trivia Nights</title>
   <meta name="description" content="Every weekly pub trivia night in Orange County, CA — San Clemente, Dana Point, Laguna Beach, Laguna Niguel, Mission Viejo and more. Find where to play tonight." />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://triviaoc.com" />
-  <meta property="og:title"       content="OC Trivia Tracker — Orange County Pub Quiz & Trivia Nights" />
-  <meta property="og:description" content="Every weekly pub trivia night in Orange County, CA. Find where to play tonight." />
+  <meta property="og:title"       content="OC Trivia Tracker — Orange County Pub Quiz &amp; Trivia Nights" />
+  <meta property="og:description" content="Every weekly pub trivia night in Orange County, CA. Find where to play." />
   <meta property="og:image"       content="https://triviaoc.com/preview.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="OC Trivia Tracker — Orange County Pub Quiz & Trivia Nights" />
-  <meta name="twitter:description" content="Every weekly pub trivia night in Orange County, CA. Find where to play tonight." />
+  <meta name="twitter:title"       content="OC Trivia Tracker — Orange County Pub Quiz &amp; Trivia Nights" />
+  <meta name="twitter:description" content="Every weekly pub trivia night in Orange County, CA. Find where to play." />
   <meta name="twitter:image"       content="https://triviaoc.com/preview.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #F5F0E8;
-      --ink: #1A1410;
-      --gold: #C4952A;
-      --rust: #B84C2A;
-      --muted: #6B6258;
-      --card-bg: #FFFDF8;
-      --border: rgba(26,20,16,0.12);
+      --cream:  #fff4d6;
+      --red:    #e02a2a;
+      --yellow: #ffcc2a;
+      --teal:   #1ca4a4;
+      --navy:   #1b1a3a;
+      --pink:   #ff7dae;
+      --ink:    #1a1a1a;
+      --mute:   rgba(26,26,26,0.65);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       background: var(--cream);
       color: var(--ink);
-      min-height: 100vh;
     }
 
-    /* ── HERO ── */
-    .hero {
-      background: var(--ink);
-      padding: 6rem 2rem 5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(196,149,42,0.08) 39px, rgba(196,149,42,0.08) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(196,149,42,0.08) 39px, rgba(196,149,42,0.08) 40px);
-    }
-    .hero-badge {
-      display: inline-block;
-      border: 1.5px solid var(--gold);
-      color: var(--gold);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.05;
-      position: relative;
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      margin-top: 1.25rem;
-      letter-spacing: 0.02em;
-      position: relative;
-    }
-    .hero-rule {
-      width: 60px;
-      height: 2px;
-      background: var(--gold);
-      margin: 2rem auto 0;
-      position: relative;
-    }
-
-    /* ── NAV ── */
-    .top-nav {
-      background: var(--cream);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.5rem;
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 12px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .view-toggle {
-      display: flex;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      border-radius: 4px;
-    }
-    .view-btn {
-      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 7px 18px;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      border-right: 1px solid var(--border);
-      transition: all 0.15s;
-    }
-    .view-btn:last-child { border-right: none; }
-    .view-btn.active { background: var(--ink); color: var(--gold); }
-
-    .day-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-    .day-pill {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      border-radius: 100px;
-      transition: all 0.15s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .day-pill:hover, .day-pill.active {
-      background: var(--ink);
-      color: var(--gold);
-      border-color: var(--ink);
-    }
-    .day-pills.hidden { display: none; }
-
-    /* ── SECTION ── */
-    .section { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2rem;
+      letter-spacing: 0.16em;
       font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* ── LIST VIEW ── */
-    .venue-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .venue-card {
-      background: var(--card-bg);
-      padding: 1.5rem 1.25rem;
-      transition: background 0.15s;
-    }
-    .venue-card:hover { background: #fff; }
-    .venue-card[style*="none"] { display: none; }
-
-    .venue-day {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.4rem;
+      border-bottom: 4px solid var(--yellow);
     }
-    .venue-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
-      line-height: 1.25;
-    }
-    .venue-city { font-size: 12px; color: var(--muted); margin-bottom: 0.6rem; }
-    .venue-time { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
-    .venue-host { font-size: 11px; color: var(--muted); margin-bottom: 0.65rem; }
-    .venue-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .tag {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      padding: 3px 8px;
-      border-radius: 3px;
-    }
-    .tag-free    { background: #EAF3DE; color: #3B6D11; }
-    .tag-brewery { background: #E6F1FB; color: #185FA5; }
-    .tag-coffee  { background: #FAEEDA; color: #854F0B; }
-    .tag-bar     { background: #FBEAF0; color: #993556; }
-    .tag-monthly { background: #F1EFE8; color: #5F5E5A; }
-    .venue-links { margin-top: 0.65rem; display: flex; gap: 10px; }
-    .venue-link {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(196,149,42,0.3);
-      padding-bottom: 1px;
-      transition: border-color 0.15s;
-    }
-    .venue-link:hover { border-color: var(--gold); }
-
-    /* ── CALENDAR VIEW ── */
-    #cal-view { display: none; }
-
-    .cal-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.25rem;
-    }
-    .cal-month {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .cal-arrow {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      cursor: pointer;
-      transition: all 0.15s;
-      border-radius: 3px;
-    }
-    .cal-arrow:hover { background: var(--ink); color: var(--gold); border-color: var(--ink); }
-
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      border: 1px solid var(--border);
-      background: var(--border);
-      gap: 1px;
-    }
-    .cal-header {
-      background: var(--ink);
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 10px 6px;
-      text-align: center;
-    }
-    .cal-day {
-      background: var(--card-bg);
-      padding: 10px 8px;
-      min-height: 140px;
-    }
-    .cal-day.empty { background: rgba(245,240,232,0.5); }
-    .cal-day.today { background: #fff; box-shadow: inset 0 0 0 2px var(--gold); }
-    .cal-day-num {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      margin-bottom: 6px;
-      display: block;
-    }
-    .cal-event {
-      background: #EDE8DF;
-      color: var(--ink);
-      font-size: 10px;
-      font-weight: 500;
-      padding: 4px 6px;
-      margin-bottom: 4px;
-      border-radius: 3px;
-      line-height: 1.35;
-      cursor: default;
-      border-left: 2px solid var(--ink);
-    }
-    .cal-event .ev-time  { color: var(--muted); font-size: 9px; display: block; }
-    .cal-event .ev-name  { color: var(--ink); display: block; font-weight: 500; }
-    .cal-event .ev-city  { color: var(--muted); font-size: 9px; display: block; }
-    .cal-event.ev-gold   { background: #FDF3DC; border-left-color: var(--gold); }
-    .cal-event.ev-gold .ev-time { color: #8A6415; }
-    .cal-event.ev-gold .ev-name { color: #5C4010; }
-    .cal-event.ev-gold .ev-city { color: #8A6415; }
-
-    .cal-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 1rem;
-      font-size: 11px;
-      color: var(--muted);
-      align-items: center;
-    }
-    .leg-dot {
+    .ticker-right { display: flex; gap: 28px; align-items: center; }
+    .ticker-dot {
       display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      margin-right: 4px;
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      margin-right: 6px;
       vertical-align: middle;
     }
 
-    /* ── HOSTS (dark section) ── */
-    .dark-section { background: #1A1410; }
-    .dark-section .section-label { color: var(--gold); }
-    .dark-section .section-title { color: #F0E8DC; border-color: rgba(255,255,255,0.1); }
+    /* ── STRIPES ── */
+    .stripes { display: flex; height: 22px; }
+    .stripes > span { flex: 1; display: block; }
 
-    .host-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.25rem;
+    /* ── HERO ── */
+    .hero { background: var(--cream); }
+    .hero-inner { padding: 64px 48px 0; }
+
+    .eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+    .eyebrow-pill {
+      background: var(--navy); color: var(--yellow);
+      padding: 8px 16px 9px; border-radius: 999px;
+      font-size: 12px; letter-spacing: 0.22em; font-weight: 800;
     }
-    .host-card {
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.06);
-      padding: 1.25rem;
+    .eyebrow-sub {
+      font-size: 13px; letter-spacing: 0.18em; font-weight: 700;
+      color: var(--mute); text-transform: uppercase;
     }
-    .host-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 0.35rem;
+
+    .hero-h1 {
+      font-family: 'Bowlby One', serif;
+      font-size: clamp(72px, 15vw, 220px);
+      line-height: 0.86;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      text-transform: uppercase;
     }
-    .host-detail { font-size: 12px; color: #C8BFB4; line-height: 1.6; }
-    .host-link {
+    .hero-h1 .night { color: var(--red); }
+    .hero-h1 .oc-badge {
       display: inline-block;
-      margin-top: 0.6rem;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(196,149,42,0.4);
+      transform: translateY(-6px) rotate(-4deg);
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 2px 18px 6px;
+      margin-left: 18px;
+      font-size: clamp(44px, 9vw, 132px);
     }
-    .host-link:hover { border-color: var(--gold); }
 
-    /* ── ABOUT ── */
-    .about-grid {
+    .hero-lower {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 56px;
+      margin-top: 36px;
       align-items: start;
     }
-    .about-body { font-size: 1rem; line-height: 1.8; color: var(--muted); }
-    .about-body strong { color: var(--ink); font-weight: 500; }
-    .about-body p + p { margin-top: 1rem; }
+    .hero-desc { font-size: 22px; line-height: 1.45; font-weight: 500; max-width: 620px; }
 
-    .submit-box { background: var(--ink); padding: 2rem 1.5rem; }
-    .submit-box strong {
-      display: block;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.2rem;
-      color: #F0E8DC;
-      margin-bottom: 0.5rem;
+    /* price tag */
+    .price-tag-wrap { position: relative; transform: rotate(-3deg); align-self: end; }
+    .price-tag {
+      position: relative; display: inline-block;
+      background: var(--yellow); color: var(--navy);
+      padding: 24px 36px 24px 58px;
+      clip-path: polygon(28px 0, 100% 0, 100% 100%, 28px 100%, 0 50%);
+      min-width: 300px;
     }
-    .submit-box p { color: #C8BFB4; font-size: 0.9rem; line-height: 1.7; }
-    .submit-btn {
-      display: inline-block;
-      margin-top: 1rem;
-      background: var(--gold);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 10px 22px;
-      text-decoration: none;
-      transition: opacity 0.15s;
+    .price-tag-hole {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--cream); border: 2px solid var(--navy);
     }
-    .submit-btn:hover { opacity: 0.85; }
+    .pt-eyebrow { font-size: 11px; letter-spacing: 0.25em; font-weight: 800; margin-bottom: 4px; }
+    .pt-num { font-family: 'Bowlby One', serif; font-size: 56px; line-height: 0.95; color: var(--red); }
+    .pt-label { font-size: 13px; letter-spacing: 0.16em; font-weight: 800; }
+    .pt-days { font-size: 11px; letter-spacing: 0.16em; font-weight: 700; margin-top: 10px; opacity: 0.65; }
+
+    /* hero CTA */
+    .hero-cta { display: flex; gap: 12px; margin-top: 48px; margin-bottom: 72px; align-items: stretch; }
+    .cta-btn {
+      background: var(--red); color: var(--cream); text-decoration: none;
+      padding: 20px 32px 22px; font-family: 'Bowlby One', serif; font-size: 24px;
+      border: 4px solid var(--navy); box-shadow: 6px 6px 0 var(--navy);
+      text-transform: uppercase; letter-spacing: 0.02em; white-space: nowrap;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .cta-btn:hover { transform: translate(2px,2px); box-shadow: 4px 4px 0 var(--navy); }
+    .cta-coverage {
+      flex: 1; border: 4px dashed var(--navy); padding: 14px 20px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .cta-coverage-label { font-size: 10px; letter-spacing: 0.25em; font-weight: 800; color: var(--mute); }
+    .cta-coverage-cities { font-weight: 700; font-size: 14px; line-height: 1.35; color: var(--navy); margin-top: 4px; }
+
+    /* ── SCHEDULE ── */
+    .schedule { padding: 88px 48px 56px; }
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 48px; margin-bottom: 56px;
+    }
+    .section-tag {
+      display: inline-block; padding: 6px 14px 7px;
+      font-size: 12px; letter-spacing: 0.22em; font-weight: 800;
+      margin-bottom: 20px; text-transform: uppercase;
+    }
+    .tag-navy { background: var(--navy); color: var(--yellow); }
+    .tag-red  { background: var(--red);  color: var(--cream); }
+    .tag-yellow { background: var(--yellow); color: var(--navy); }
+
+    .section-h2 {
+      font-family: 'Bowlby One', serif; font-weight: 400;
+      font-size: clamp(52px, 9vw, 132px); line-height: 0.88;
+      color: var(--navy); text-transform: uppercase; letter-spacing: -0.015em;
+    }
+    .accent-red  { color: var(--red); }
+    .accent-teal { color: var(--teal); }
+    .accent-yellow { color: var(--yellow); }
+    .section-desc { font-size: 18px; line-height: 1.5; color: var(--mute); max-width: 420px; font-weight: 500; }
+
+    /* day groups */
+    .day-group { margin-bottom: 56px; }
+    .day-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .day-badge {
+      font-family: 'Bowlby One', serif; font-size: 44px; line-height: 1;
+      padding: 10px 22px 14px; text-transform: uppercase; letter-spacing: 0.02em;
+      border: 4px solid var(--navy); box-shadow: 5px 5px 0 var(--navy);
+      transform: rotate(-1deg);
+    }
+    .day-count { font-size: 13px; letter-spacing: 0.22em; font-weight: 800; color: var(--mute); }
+    .day-rule { flex: 1; border-bottom: 3px dashed var(--navy); margin-left: 12px; }
+    .ticket-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+
+    /* ticket rows */
+    .ticket {
+      display: grid; grid-template-columns: 130px 1fr auto; align-items: stretch;
+      text-decoration: none; color: var(--ink); background: var(--cream);
+      border: 3px solid var(--navy); box-shadow: 4px 4px 0 var(--navy);
+      min-height: 112px; transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .ticket:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--navy); }
+    .t-stub {
+      padding: 14px 10px; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      border-right: 3px dashed var(--navy); font-family: 'Bowlby One', serif;
+    }
+    .t-stub-time { font-size: 26px; line-height: 1; text-transform: uppercase; }
+    .t-stub-ampm {
+      font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 800;
+      letter-spacing: 0.16em; margin-top: 6px; text-transform: uppercase;
+    }
+    .t-stub-day {
+      font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; margin-top: 10px; opacity: 0.75; text-transform: uppercase;
+    }
+    .t-body { padding: 14px 18px 14px 20px; display: flex; flex-direction: column; justify-content: center; }
+    .t-venue { font-family: 'Bowlby One', serif; font-size: 24px; line-height: 1.1; text-transform: uppercase; color: var(--navy); }
+    .t-city { font-size: 14px; font-weight: 600; color: var(--mute); margin-top: 4px; }
+    .t-meta { margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; }
+    .t-host-badge {
+      display: inline-block; font-size: 10px; letter-spacing: 0.2em; font-weight: 800;
+      background: var(--navy); color: var(--cream); padding: 3px 8px 4px; text-transform: uppercase;
+    }
+    .t-time-label { font-size: 13px; font-weight: 600; color: var(--mute); }
+    .t-arrow {
+      display: flex; align-items: center; padding: 0 18px;
+      border-left: 3px dashed var(--navy); color: var(--navy);
+      font-family: 'Bowlby One', serif; font-size: 28px;
+    }
+
+    /* monthly block */
+    .monthly-block {
+      background: var(--navy); color: var(--cream); padding: 36px 36px 32px;
+      position: relative; border: 4px solid var(--navy); box-shadow: 10px 10px 0 var(--red);
+    }
+    .monthly-tag {
+      position: absolute; top: -18px; left: 24px;
+      background: var(--yellow); color: var(--navy);
+      padding: 6px 16px 8px; font-family: 'Bowlby One', serif; font-size: 18px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      border: 4px solid var(--navy); transform: rotate(-2deg);
+    }
+    .monthly-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
+    .m-venue { font-family: 'Bowlby One', serif; font-size: 36px; line-height: 1.05; text-transform: uppercase; margin-bottom: 6px; }
+    .m-city { color: rgba(255,244,214,0.7); font-size: 14px; font-weight: 600; }
+    .m-cadence { color: var(--yellow); font-size: 12px; letter-spacing: 0.2em; font-weight: 800; margin-top: 10px; text-transform: uppercase; }
+
+    /* ── HOSTS ── */
+    .hosts { background: var(--cream); padding: 56px 48px 88px; }
+    .hosts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .host-card {
+      text-decoration: none; padding: 28px 26px 24px; position: relative;
+      border: 4px solid var(--navy); box-shadow: 8px 8px 0 var(--navy);
+      display: flex; flex-direction: column; min-height: 240px;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .host-card:hover { box-shadow: 5px 5px 0 var(--navy); }
+    .host-num {
+      position: absolute; top: -14px; right: 16px;
+      background: var(--navy); color: var(--yellow);
+      font-family: 'Bowlby One', serif; font-size: 22px; line-height: 1;
+      padding: 6px 10px 8px; border: 3px solid var(--navy);
+    }
+    .host-name { font-family: 'Bowlby One', serif; font-size: 36px; line-height: 1; text-transform: uppercase; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .host-blurb { font-size: 15px; line-height: 1.45; font-weight: 500; flex: 1; }
+    .host-url { margin-top: 18px; font-size: 12px; letter-spacing: 0.2em; font-weight: 800; text-transform: uppercase; }
+
+    .submit-card {
+      text-decoration: none; color: var(--cream); background: var(--navy);
+      padding: 28px 26px 24px; position: relative;
+      border: 4px solid var(--navy); box-shadow: 8px 8px 0 var(--red);
+      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 240px; transform: rotate(1deg);
+      transition: box-shadow 0.1s;
+    }
+    .submit-card:hover { box-shadow: 5px 5px 0 var(--red); }
+    .submit-eyebrow { font-size: 11px; letter-spacing: 0.28em; font-weight: 800; color: var(--yellow); margin-bottom: 16px; }
+    .submit-headline { font-family: 'Bowlby One', serif; font-size: 32px; line-height: 1; text-transform: uppercase; }
+    .submit-cta { font-size: 12px; letter-spacing: 0.2em; font-weight: 800; color: var(--yellow); text-transform: uppercase; }
+
+    /* ── HONESTY ── */
+    .honesty { background: var(--red); color: var(--cream); padding: 72px 48px; }
+    .honesty-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; }
+    .honesty-h2 {
+      font-family: 'Bowlby One', serif; font-weight: 400;
+      font-size: clamp(44px, 6vw, 88px); line-height: 0.88;
+      margin: 0; text-transform: uppercase;
+    }
+    .honesty-body { font-size: 19px; line-height: 1.55; font-weight: 500; }
+    .honesty-body p + p { margin-top: 1em; }
+    .honesty-btn {
+      display: inline-block; margin-top: 16px;
+      background: var(--yellow); color: var(--navy);
+      padding: 16px 24px 18px; font-family: 'Bowlby One', serif; font-size: 20px;
+      text-decoration: none; border: 4px solid var(--navy); box-shadow: 6px 6px 0 var(--navy);
+      text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .honesty-btn:hover { transform: translate(2px,2px); box-shadow: 4px 4px 0 var(--navy); }
 
     /* ── FOOTER ── */
     .footer {
-      background: var(--ink);
-      padding: 2rem;
-      text-align: center;
-      font-size: 12px;
-      color: #7A6E66;
-      letter-spacing: 0.05em;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      background: var(--navy); color: var(--cream);
+      padding: 28px 48px; display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; letter-spacing: 0.22em; font-weight: 800; text-transform: uppercase;
+      border-top: 4px solid var(--yellow);
     }
-    .footer span { color: var(--gold); }
+    .footer-brand { font-family: 'Bowlby One', serif; font-size: 24px; color: var(--yellow); letter-spacing: 0.02em; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .cal-day { min-height: 90px; padding: 6px 4px; }
-      .cal-event { font-size: 9px; padding: 3px 4px; }
-      .top-nav { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 900px) {
+      .ticker { padding: 10px 20px; }
+      .hero-inner { padding: 40px 24px 0; }
+      .hero-lower { grid-template-columns: 1fr; gap: 24px; }
+      .price-tag-wrap { display: none; }
+      .hero-cta { flex-direction: column; margin-bottom: 48px; }
+      .cta-coverage { display: none; }
+      .schedule { padding: 56px 24px 40px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .ticket-grid { grid-template-columns: 1fr; }
+      .hosts { padding: 40px 24px 56px; }
+      .hosts-grid { grid-template-columns: 1fr 1fr; }
+      .honesty { padding: 48px 24px; }
+      .honesty-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .monthly-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .ticker-right { display: none; }
+      .hosts-grid { grid-template-columns: 1fr; }
+      .day-badge { font-size: 28px; padding: 8px 14px 10px; }
+      .t-venue { font-size: 18px; }
+      .eyebrow-sub { display: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- TICKER -->
+<div class="ticker">
+  <span>📍 Orange County · CA</span>
+  <div class="ticker-right">
+    <span>Updated weekly</span>
+    <span><span class="ticker-dot"></span>APRIL 2026</span>
+  </div>
+</div>
+
 <!-- HERO -->
-<header class="hero">
-  <div class="hero-badge">Orange County, CA</div>
-  <h1>OC Trivia <em>Tracker</em></h1>
-  <p class="hero-sub">Every weekly pub quiz & trivia night in Orange County — in one place.</p>
-  <div class="hero-rule"></div>
-</header>
-
-<!-- STICKY NAV -->
-<nav class="top-nav">
-  <div class="view-toggle">
-    <button class="view-btn active" id="btn-list" onclick="switchView('list')">List</button>
-    <button class="view-btn" id="btn-cal" onclick="switchView('cal')">Calendar</button>
-  </div>
-  <div class="day-pills" id="day-pills">
-    <button class="day-pill active" onclick="filterDay('all', this)">All nights</button>
-    <button class="day-pill" onclick="filterDay('sunday', this)">Sunday</button>
-    <button class="day-pill" onclick="filterDay('tuesday', this)">Tuesday</button>
-    <button class="day-pill" onclick="filterDay('wednesday', this)">Wednesday</button>
-    <button class="day-pill" onclick="filterDay('thursday', this)">Thursday</button>
-  </div>
-</nav>
-
-<!-- LIST VIEW -->
-<div id="list-view">
-  <div class="section">
-    <p class="section-label">The full schedule</p>
-    <h2 class="section-title">Where to play</h2>
-    <div class="venue-grid" id="venue-grid">
-
-      <div class="venue-card" data-day="sunday">
-        <div class="venue-day">Sunday</div>
-        <div class="venue-name">High Tide Coffee</div>
-        <div class="venue-city">Laguna Niguel</div>
-        <div class="venue-time">4:00 PM</div>
-        <div class="venue-host">Thinky Drinky Trivia</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/hightidecoffeeco/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="tuesday">
-        <div class="venue-day">Tuesday</div>
-        <div class="venue-name">OC Local Taproom</div>
-        <div class="venue-city">Laguna Niguel</div>
-        <div class="venue-time">6:30 PM</div>
-        <div class="venue-host">Thinky Drinky Trivia</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/oclocaltaproom/" target="_blank" rel="noopener">Instagram</a>
-          <a class="venue-link" href="https://oclocaltaproom.com" target="_blank" rel="noopener">Website</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="tuesday">
-        <div class="venue-day">Tuesday</div>
-        <div class="venue-name">Station Craft</div>
-        <div class="venue-city">Dana Point</div>
-        <div class="venue-time">7:00 PM</div>
-        <div class="venue-host">Venue-run</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/stationcraftdp/" target="_blank" rel="noopener">Instagram</a>
-          <a class="venue-link" href="https://stationcraft.com" target="_blank" rel="noopener">Website</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="tuesday">
-        <div class="venue-day">Tuesday</div>
-        <div class="venue-name">Selma's Chicago Pizzeria</div>
-        <div class="venue-city">Rancho Santa Margarita</div>
-        <div class="venue-time">6:00 PM</div>
-        <div class="venue-host">Geeks Who Drink</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">Geeks Who Drink</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="tuesday">
-        <div class="venue-day">Tuesday</div>
-        <div class="venue-name">Wigz Sandwich Shop</div>
-        <div class="venue-city">Laguna Beach</div>
-        <div class="venue-time">Evenings</div>
-        <div class="venue-host">King Trivia</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://kingtrivia.com" target="_blank" rel="noopener">King Trivia</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="tuesday">
-        <div class="venue-day">Tuesday</div>
-        <div class="venue-name">Gibroni's Pizza</div>
-        <div class="venue-city">San Clemente</div>
-        <div class="venue-time">7:00 PM</div>
-        <div class="venue-host">DJ Trivia</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.djtrivia.com" target="_blank" rel="noopener">DJ Trivia</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="wednesday">
-        <div class="venue-day">Wednesday</div>
-        <div class="venue-name">Los Molinos Beer Co.</div>
-        <div class="venue-city">San Clemente</div>
-        <div class="venue-time">6:30 PM</div>
-        <div class="venue-host">Little Witch Presents</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/losmolinosbeer/" target="_blank" rel="noopener">Instagram</a>
-          <a class="venue-link" href="https://losmolinosbeer.com" target="_blank" rel="noopener">Website</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="wednesday">
-        <div class="venue-day">Wednesday</div>
-        <div class="venue-name">Delahunt Tap Room</div>
-        <div class="venue-city">Dana Point</div>
-        <div class="venue-time">Wednesdays</div>
-        <div class="venue-host">Venue-run</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/delahuntbrewing/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="wednesday">
-        <div class="venue-day">Wednesday</div>
-        <div class="venue-name">Left Coast Tasting Room</div>
-        <div class="venue-city">San Clemente</div>
-        <div class="venue-time">7:00–9:00 PM</div>
-        <div class="venue-host">Geeks Who Drink</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">Geeks Who Drink</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="thursday">
-        <div class="venue-day">Thursday</div>
-        <div class="venue-name">Station Craft Taproom</div>
-        <div class="venue-city">San Clemente</div>
-        <div class="venue-time">Evenings</div>
-        <div class="venue-host">Venue-run</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://sc.stationcraft.com" target="_blank" rel="noopener">Website</a>
-          <a class="venue-link" href="https://www.instagram.com/stationcraftsc/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="thursday">
-        <div class="venue-day">Thursday</div>
-        <div class="venue-name">Dry Society</div>
-        <div class="venue-city">Mission Viejo</div>
-        <div class="venue-time">Evenings</div>
-        <div class="venue-host">King Trivia</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://kingtrivia.com" target="_blank" rel="noopener">King Trivia</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="varies">
-        <div class="venue-day">Monthly</div>
-        <div class="venue-name">Dana Point Ale House</div>
-        <div class="venue-city">Dana Point</div>
-        <div class="venue-time">Check Instagram</div>
-        <div class="venue-host">Venue-run</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/danapointalehouse/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="venue-card" data-day="varies">
-        <div class="venue-day">Check schedule</div>
-        <div class="venue-name">Docent Brewing</div>
-        <div class="venue-city">SJC · San Clemente · Laguna Hills</div>
-        <div class="venue-time">Varies by location</div>
-        <div class="venue-host">Venue-run</div>
-        <div class="venue-links">
-          <a class="venue-link" href="https://www.instagram.com/docentbrewing/" target="_blank" rel="noopener">Instagram</a>
-          <a class="venue-link" href="https://docentbrewing.com" target="_blank" rel="noopener">Website</a>
-        </div>
-      </div>
-
-    </div><!-- /venue-grid -->
-  </div><!-- /section -->
-</div><!-- /list-view -->
-
-<!-- CALENDAR VIEW -->
-<div id="cal-view">
-  <div class="section">
-    <div class="cal-nav">
-      <button class="cal-arrow" onclick="changeMonth(-1)">&#8592; Prev</button>
-      <div class="cal-month" id="cal-month-label"></div>
-      <button class="cal-arrow" onclick="changeMonth(1)">Next &#8594;</button>
+<section class="hero">
+  <div class="stripes" id="stripes-top"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <div class="eyebrow-pill">COME ON DOWN</div>
+      <div class="eyebrow-sub">— The complete OC pub-quiz guide</div>
     </div>
-    <div class="cal-grid" id="cal-grid"></div>
-    <div class="cal-legend">
-      <span>
-        <span class="leg-dot" style="background:#EDE8DF; border-left: 2px solid #1A1410;"></span>
-        Weekly recurring
-      </span>
-      <span>
-        <span class="leg-dot" style="background:#FDF3DC; border-left: 2px solid #C4952A;"></span>
-        Monthly / check schedule
-      </span>
-      <span>Today is outlined in gold</span>
+    <h1 class="hero-h1">
+      Trivia<br>
+      <span class="night">Night</span><span class="oc-badge">O.C.</span>
+    </h1>
+    <div class="hero-lower">
+      <p class="hero-desc">Every trivia night from San Clemente to Laguna Beach, in one list.</p>
+      <div class="price-tag-wrap">
+        <div class="price-tag">
+          <div class="price-tag-hole"></div>
+          <div class="pt-eyebrow">EVERY WEEK</div>
+          <div class="pt-num">11</div>
+          <div class="pt-label">GAMES ON THE BOARD</div>
+          <div class="pt-days">SUN · TUE · WED · THU</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<!-- HOSTS SECTION -->
-<div class="dark-section">
-  <div class="section" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <p class="section-label">The hosts behind the mic</p>
-    <h2 class="section-title">Trivia companies</h2>
-    <div class="host-row">
-      <div class="host-card">
-        <div class="host-name">Thinky Drinky</div>
-        <div class="host-detail">QR code format. OC Local Taproom (Tues) + High Tide Coffee (Sun). Prizes for 1st–3rd place.</div>
-        <a class="host-link" href="https://www.thinkydrinkytrivia.com" target="_blank" rel="noopener">thinkydrinkytrivia.com</a>
-      </div>
-      <div class="host-card">
-        <div class="host-name">King Trivia</div>
-        <div class="host-detail">Wigz Laguna Beach (Tues) + Dry Society Mission Viejo (Thurs).</div>
-        <a class="host-link" href="https://kingtrivia.com" target="_blank" rel="noopener">kingtrivia.com</a>
-      </div>
-      <div class="host-card">
-        <div class="host-name">Geeks Who Drink</div>
-        <div class="host-detail">Selma's RSM (Tues) + Left Coast SC (Wed). Classic 8-round pub format.</div>
-        <a class="host-link" href="https://www.geekswhodrink.com" target="_blank" rel="noopener">geekswhodrink.com</a>
-      </div>
-      <div class="host-card">
-        <div class="host-name">DJ Trivia</div>
-        <div class="host-detail">Gibroni's Pizza San Clemente (Tues 7 PM). Win prizes!</div>
-        <a class="host-link" href="https://www.djtrivia.com" target="_blank" rel="noopener">djtrivia.com</a>
-      </div>
-      <div class="host-card">
-        <div class="host-name">Little Witch Presents</div>
-        <div class="host-detail">Los Molinos Beer Co. every Wednesday at 6:30 PM. Championship rounds available.</div>
-        <a class="host-link" href="https://www.kleinahexa.com/little-witch-presents" target="_blank" rel="noopener">Schedule</a>
+    <div class="hero-cta">
+      <a class="cta-btn" href="#schedule">See the full board →</a>
+      <div class="cta-coverage">
+        <div class="cta-coverage-label">COVERAGE</div>
+        <div class="cta-coverage-cities">San Clemente · Dana Point · SJC · Laguna Beach · Laguna Niguel · Mission Viejo · RSM</div>
       </div>
     </div>
   </div>
-</div>
+  <div class="stripes" id="stripes-bottom"></div>
+</section>
 
-<!-- ABOUT / SUBMIT -->
-<div class="section">
-  <p class="section-label">About this guide</p>
-  <h2 class="section-title">Keep the list honest</h2>
-  <div class="about-grid">
-    <div class="about-body">
-      <p>Trivia schedules change constantly — venues swap nights, hosts go on hiatus during big sports seasons, and new spots pop up without much fanfare.</p>
-      <p>This guide covers <strong>San Clemente, Dana Point, San Juan Capistrano, Laguna Beach, Laguna Niguel, Mission Viejo, Rancho Santa Margarita,</strong> and expanding through Orange County.</p>
-      <p>Each listing shows the last known schedule. Always confirm with the venue's Instagram before heading out — it's the most reliable real-time source for cancellations and theme nights.</p>
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="section-header">
+    <div>
+      <div class="section-tag tag-navy">§ THE BIG BOARD</div>
+      <h2 class="section-h2">Where<br>to <span class="accent-red">play</span><span class="accent-teal">.</span></h2>
     </div>
-    <div class="submit-box">
-      <strong>Know something we don't?</strong>
-      <p>If your local spot runs trivia and isn't listed — or if a schedule here is out of date — let us know. We update this list weekly.</p>
-      <a class="submit-btn" href="mailto:hello@southoctrivia.com">Submit a venue &rarr;</a>
+    <p class="section-desc">Eleven weekly nights + two monthly drop-ins. Always confirm on Instagram before you go — schedules wobble.</p>
+  </div>
+  <div id="schedule-grid"></div>
+  <div class="monthly-block">
+    <div class="monthly-tag">Monthly &amp; drop-in</div>
+    <div class="monthly-grid" id="monthly-grid"></div>
+  </div>
+</section>
+
+<!-- HOSTS -->
+<section class="hosts" id="hosts">
+  <div style="margin-bottom:48px">
+    <div class="section-tag tag-red">§ BEHIND THE MIC</div>
+    <h2 class="section-h2">The <span class="accent-red">hosts</span>.</h2>
+  </div>
+  <div class="hosts-grid" id="hosts-grid"></div>
+</section>
+
+<!-- HONESTY -->
+<section class="honesty">
+  <div class="honesty-grid">
+    <div>
+      <div class="section-tag tag-yellow" style="margin-bottom:16px">§ A NOTE ON HONESTY</div>
+      <h2 class="honesty-h2">Keep the list <span class="accent-yellow">honest</span>.</h2>
+    </div>
+    <div class="honesty-body">
+      <p>Trivia schedules change constantly — venues swap nights, hosts go on hiatus during football season, and new spots pop up without much fanfare.</p>
+      <p>Every listing shows the <strong style="color:var(--yellow)">last known schedule.</strong> Always confirm with the venue's Instagram before heading out — it's the most reliable source for cancellations and theme nights.</p>
+      <a class="honesty-btn" href="mailto:hello@triviaoc.com">hello@triviaoc.com →</a>
     </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <span>OC Trivia Tracker</span> &nbsp;&middot;&nbsp; Last updated April 2026 &nbsp;&middot;&nbsp; Always verify with the venue before you go
+  <div class="footer-brand">OC TRIVIA TRACKER</div>
+  <div>Updated April 2026 · Verify with the venue</div>
 </footer>
 
 <script>
-  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-
-  const WEEKLY_EVENTS = [
-    { day: 0, name: 'High Tide Coffee',     city: 'Laguna Niguel',  time: '4:00 PM',  type: 'weekly' },
-    { day: 2, name: 'OC Local Taproom',     city: 'Laguna Niguel',  time: '6:30 PM',  type: 'weekly' },
-    { day: 2, name: 'Station Craft',        city: 'Dana Point',     time: '7:00 PM',  type: 'weekly' },
-    { day: 2, name: "Selma's Pizzeria",     city: 'Rancho SM',      time: '6:00 PM',  type: 'weekly' },
-    { day: 2, name: 'Wigz Sandwich Shop',   city: 'Laguna Beach',   time: 'Evening',  type: 'weekly' },
-    { day: 2, name: "Gibroni's Pizza",      city: 'San Clemente',   time: '7:00 PM',  type: 'weekly' },
-    { day: 3, name: 'Los Molinos Beer',     city: 'San Clemente',   time: '6:30 PM',  type: 'weekly' },
-    { day: 3, name: 'Delahunt Tap Room',    city: 'Dana Point',     time: 'Evening',  type: 'weekly' },
-    { day: 3, name: 'Left Coast Tasting',   city: 'San Clemente',   time: '7:00 PM',  type: 'weekly' },
-    { day: 4, name: 'Station Craft',        city: 'San Clemente',   time: 'Evening',  type: 'weekly' },
-    { day: 4, name: 'Dry Society',          city: 'Mission Viejo',  time: 'Evening',  type: 'weekly' },
+  const SCHEDULE = [
+    { day:'Sunday',    venue:'High Tide Coffee',          city:'Laguna Niguel',          time:'4:00 PM',  host:'Thinky Drinky Trivia', href:'https://www.instagram.com/hightidecoffeeco/' },
+    { day:'Tuesday',   venue:'OC Local Taproom',          city:'Laguna Niguel',          time:'6:30 PM',  host:'Thinky Drinky Trivia', href:'https://www.instagram.com/oclocaltaproom/' },
+    { day:'Tuesday',   venue:'Station Craft',             city:'Dana Point',             time:'7:00 PM',  host:'Venue-run',            href:'https://stationcraft.com' },
+    { day:'Tuesday',   venue:"Selma's Chicago Pizzeria",  city:'Rancho Santa Margarita', time:'6:00 PM',  host:'Geeks Who Drink',      href:'https://www.geekswhodrink.com' },
+    { day:'Tuesday',   venue:'Wigz Sandwich Shop',        city:'Laguna Beach',           time:'6:30 PM',  host:'King Trivia',          href:'https://kingtrivia.com' },
+    { day:'Tuesday',   venue:"Gibroni's Pizza",           city:'San Clemente',           time:'7:00 PM',  host:'DJ Trivia',            href:'https://www.djtrivia.com' },
+    { day:'Wednesday', venue:'Los Molinos Beer Co.',      city:'San Clemente',           time:'6:30 PM',  host:'Little Witch Presents',href:'https://losmolinosbeer.com' },
+    { day:'Wednesday', venue:'Delahunt Tap Room',         city:'Dana Point',             time:'6:30 PM',  host:'Venue-run',            href:'https://www.instagram.com/delahuntbrewing/' },
+    { day:'Wednesday', venue:'Left Coast Tasting Room',   city:'San Clemente',           time:'7:00 PM',  host:'Geeks Who Drink',      href:'https://www.geekswhodrink.com' },
+    { day:'Thursday',  venue:'Station Craft Taproom',     city:'San Clemente',           time:'6:30 PM',  host:'Venue-run',            href:'https://sc.stationcraft.com' },
+    { day:'Thursday',  venue:'Dry Society',               city:'Mission Viejo',          time:'6:30 PM',  host:'King Trivia',          href:'https://kingtrivia.com' },
   ];
 
-  let currentYear, currentMonth;
+  const MONTHLY = [
+    { venue:'Dana Point Ale House', city:'Dana Point',                        cadence:'Monthly' },
+    { venue:'Docent Brewing',       city:'SJC · San Clemente · Laguna Hills', cadence:'Check schedule' },
+  ];
 
-  function initCal() {
-    const now = new Date();
-    currentYear = now.getFullYear();
-    currentMonth = now.getMonth();
-    renderCal();
-  }
+  const HOSTS = [
+    { name:'Thinky Drinky',         blurb:'QR code format. OC Local Taproom (Tues) + High Tide Coffee (Sun). Prizes for 1st–3rd.',  url:'thinkydrinkytrivia.com', href:'https://www.thinkydrinkytrivia.com',                   tint:'#ffcc2a', fg:'#1b1a3a', rot:-1   },
+    { name:'King Trivia',           blurb:'Wigz Laguna Beach (Tues) + Dry Society Mission Viejo (Thurs).',                          url:'kingtrivia.com',         href:'https://kingtrivia.com',                               tint:'#1ca4a4', fg:'#fff4d6', rot:0.5  },
+    { name:'Geeks Who Drink',       blurb:"Selma's RSM (Tues) + Left Coast SC (Wed). Classic 8-round pub format.",                  url:'geekswhodrink.com',      href:'https://www.geekswhodrink.com',                        tint:'#ff7dae', fg:'#1b1a3a', rot:-0.5 },
+    { name:'DJ Trivia',             blurb:"Gibroni's Pizza San Clemente (Tues 7 PM). Win prizes!",                                  url:'djtrivia.com',           href:'https://www.djtrivia.com',                             tint:'#e02a2a', fg:'#fff4d6', rot:1    },
+    { name:'Little Witch Presents', blurb:'Los Molinos Beer Co. every Wednesday at 6:30 PM. Championship rounds available.',        url:'kleinahexa.com',         href:'https://www.kleinahexa.com/little-witch-presents',     tint:'#ffcc2a', fg:'#1b1a3a', rot:-0.5 },
+  ];
 
-  function changeMonth(dir) {
-    currentMonth += dir;
-    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-    if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
-    renderCal();
-  }
+  const DAY_BADGE = {
+    Sunday:    { bg:'#1ca4a4', fg:'#fff4d6' },
+    Tuesday:   { bg:'#e02a2a', fg:'#fff4d6' },
+    Wednesday: { bg:'#ffcc2a', fg:'#1b1a3a' },
+    Thursday:  { bg:'#ff7dae', fg:'#1b1a3a' },
+  };
 
-  function renderCal() {
-    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    document.getElementById('cal-month-label').textContent = monthNames[currentMonth] + ' ' + currentYear;
+  const STRIPE_COLORS = ['#e02a2a','#ffcc2a','#1ca4a4','#ff7dae','#e02a2a','#ffcc2a'];
 
-    const grid = document.getElementById('cal-grid');
-    grid.innerHTML = '';
+  // stripes
+  ['stripes-top','stripes-bottom'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    const cols = i === 0 ? STRIPE_COLORS : [...STRIPE_COLORS].reverse();
+    cols.forEach(c => { const s = document.createElement('span'); s.style.background = c; el.appendChild(s); });
+  });
 
-    DAYS.forEach(function(d) {
-      var h = document.createElement('div');
-      h.className = 'cal-header';
-      h.textContent = d;
-      grid.appendChild(h);
+  // time helpers
+  function tNum(t)  { return (t.match(/\d{1,2}(?::\d{2})?/) || ['—'])[0]; }
+  function tAmPm(t) { return /pm/i.test(t) ? 'PM' : /am/i.test(t) ? 'AM' : ''; }
+
+  // schedule
+  const schedGrid = document.getElementById('schedule-grid');
+  ['Sunday','Tuesday','Wednesday','Thursday'].forEach(day => {
+    const games = SCHEDULE.filter(s => s.day === day);
+    const b = DAY_BADGE[day];
+    const group = document.createElement('div');
+    group.className = 'day-group';
+    group.innerHTML = `
+      <div class="day-header">
+        <div class="day-badge" style="background:${b.bg};color:${b.fg}">${day}</div>
+        <div class="day-count">${games.length} GAME${games.length !== 1 ? 'S' : ''} ON</div>
+        <div class="day-rule"></div>
+      </div>
+      <div class="ticket-grid" id="tg-${day}"></div>
+    `;
+    schedGrid.appendChild(group);
+    const grid = group.querySelector(`#tg-${day}`);
+    games.forEach(g => {
+      const a = document.createElement('a');
+      a.className = 'ticket';
+      a.href = g.href; a.target = '_blank'; a.rel = 'noreferrer';
+      a.innerHTML = `
+        <div class="t-stub" style="background:${b.bg};color:${b.fg}">
+          <div class="t-stub-time">${tNum(g.time)}</div>
+          <div class="t-stub-ampm">${tAmPm(g.time)}</div>
+          <div class="t-stub-day">${g.day.slice(0,3)}</div>
+        </div>
+        <div class="t-body">
+          <div class="t-venue">${g.venue}</div>
+          <div class="t-city">${g.city}</div>
+          <div class="t-meta">
+            <span class="t-host-badge">${g.host}</span>
+            <span class="t-time-label">${g.time}</span>
+          </div>
+        </div>
+        <div class="t-arrow">↗</div>
+      `;
+      grid.appendChild(a);
     });
+  });
 
-    var dayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
-    var firstDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-    var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    var today = new Date();
+  // monthly
+  const mGrid = document.getElementById('monthly-grid');
+  MONTHLY.forEach(m => {
+    const d = document.createElement('div');
+    d.innerHTML = `<div class="m-venue">${m.venue}</div><div class="m-city">${m.city}</div><div class="m-cadence">${m.cadence}</div>`;
+    mGrid.appendChild(d);
+  });
 
-    for (var i = 0; i < firstDay; i++) {
-      var empty = document.createElement('div');
-      empty.className = 'cal-day empty';
-      grid.appendChild(empty);
-    }
+  // hosts
+  const hostsGrid = document.getElementById('hosts-grid');
+  HOSTS.forEach((h, i) => {
+    const a = document.createElement('a');
+    a.className = 'host-card';
+    a.href = h.href; a.target = '_blank'; a.rel = 'noreferrer';
+    a.style.cssText = `background:${h.tint};color:${h.fg};transform:rotate(${h.rot}deg)`;
+    a.innerHTML = `
+      <div class="host-num">#${i+1}</div>
+      <div class="host-name">${h.name}</div>
+      <div class="host-blurb">${h.blurb}</div>
+      <div class="host-url">${h.url} ↗</div>
+    `;
+    hostsGrid.appendChild(a);
+  });
 
-    for (var d = 1; d <= daysInMonth; d++) {
-      var cellDate = new Date(currentYear, currentMonth, d);
-      var dow = cellDate.getDay();
-      var isToday = today.getFullYear() === currentYear && today.getMonth() === currentMonth && today.getDate() === d;
-
-      var cell = document.createElement('div');
-      cell.className = 'cal-day' + (isToday ? ' today' : '');
-
-      var num = document.createElement('span');
-      num.className = 'cal-day-num';
-      num.textContent = d;
-      cell.appendChild(num);
-
-      WEEKLY_EVENTS.filter(function(e) { return e.day === dow; }).forEach(function(e) {
-        var ev = document.createElement('div');
-        ev.className = 'cal-event';
-        ev.innerHTML = '<span class="ev-time">' + e.time + '</span><span class="ev-name">' + e.name + '</span><span class="ev-city">' + e.city + '</span>';
-        cell.appendChild(ev);
-      });
-
-      // Dana Point Ale House on first Friday of each month
-      if (dow === 5 && d <= 7) {
-        var ev2 = document.createElement('div');
-        ev2.className = 'cal-event ev-gold';
-        ev2.innerHTML = '<span class="ev-time">Check IG</span><span class="ev-name">Dana Pt Ale House</span><span class="ev-city">Monthly</span>';
-        cell.appendChild(ev2);
-      }
-
-      grid.appendChild(cell);
-    }
-  }
-
-  function switchView(view) {
-    document.getElementById('list-view').style.display = view === 'list' ? 'block' : 'none';
-    document.getElementById('cal-view').style.display  = view === 'cal'  ? 'block' : 'none';
-    document.getElementById('btn-list').classList.toggle('active', view === 'list');
-    document.getElementById('btn-cal').classList.toggle('active',  view === 'cal');
-    document.getElementById('day-pills').classList.toggle('hidden', view === 'cal');
-    if (view === 'cal') initCal();
-  }
-
-  function filterDay(day, btn) {
-    document.querySelectorAll('.day-pill').forEach(function(p) { p.classList.remove('active'); });
-    btn.classList.add('active');
-    document.querySelectorAll('.venue-card').forEach(function(card) {
-      card.style.display = (day === 'all' || card.dataset.day === day) ? 'block' : 'none';
-    });
-  }
+  const sub = document.createElement('a');
+  sub.className = 'submit-card';
+  sub.href = 'mailto:hello@triviaoc.com';
+  sub.innerHTML = `
+    <div><div class="submit-eyebrow">HOST / OWNER</div><div class="submit-headline">Put your night on the board.</div></div>
+    <div class="submit-cta">SUBMIT A VENUE →</div>
+  `;
+  hostsGrid.appendChild(sub);
 </script>
-
 </body>
 </html>
