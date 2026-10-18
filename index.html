@@ -208,6 +208,33 @@
     .cta-coverage-label { font-size: 10px; letter-spacing: 0.25em; font-weight: 800; color: var(--mute); }
     .cta-coverage-cities { font-weight: 700; font-size: 14px; line-height: 1.35; color: var(--navy); margin-top: 4px; }
 
+    /* ── FEATURED EVENT ── */
+    .featured { padding: 72px 48px 0; max-width: 1400px; margin-left: auto; margin-right: auto; }
+    .featured-card {
+      position: relative; background: var(--navy); color: var(--cream);
+      border: 4px solid var(--navy); box-shadow: 10px 10px 0 var(--red);
+      padding: 44px 40px 36px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px;
+    }
+    .featured-tag {
+      position: absolute; top: -18px; left: 24px;
+      background: var(--yellow); color: var(--navy);
+      padding: 6px 16px 8px; font-family: 'Bowlby One', serif; font-size: 18px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      border: 4px solid var(--navy); transform: rotate(-2deg);
+    }
+    .featured-date { font-size: 13px; letter-spacing: 0.22em; font-weight: 800; color: var(--yellow); text-transform: uppercase; margin-bottom: 12px; }
+    .featured-title { font-family: 'Bowlby One', serif; font-size: clamp(36px, 5vw, 72px); line-height: 0.95; text-transform: uppercase; }
+    .featured-title span { color: var(--yellow); }
+    .featured-venue { margin-top: 16px; font-size: 18px; font-weight: 700; line-height: 1.4; }
+    .featured-venue small { display: block; font-size: 14px; font-weight: 500; color: rgba(255,244,214,0.7); }
+    .featured-list { list-style: none; margin-top: 8px; }
+    .featured-list li { padding: 12px 0; border-bottom: 2px dashed rgba(255,244,214,0.3); font-size: 16px; line-height: 1.4; font-weight: 500; }
+    .featured-list li strong { color: var(--yellow); }
+    .featured-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 24px; }
+    .featured-socials { font-size: 13px; letter-spacing: 0.14em; font-weight: 700; text-transform: uppercase; }
+    .featured-socials a { color: var(--yellow); text-decoration: none; }
+    .featured-socials a:hover { text-decoration: underline; }
+
     /* ── SCHEDULE ── */
     .schedule { padding: 88px 48px 56px; max-width: 1400px; margin-left: auto; margin-right: auto; }
     .section-header {
@@ -369,6 +396,8 @@
       .price-tag-wrap { display: none; }
       .hero-cta { flex-direction: column; margin-bottom: 48px; }
       .cta-coverage { display: none; }
+      .featured { padding: 56px 24px 0; }
+      .featured-card { grid-template-columns: 1fr; gap: 24px; padding: 40px 24px 28px; }
       .schedule { padding: 56px 24px 40px; }
       .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
       .ticket-grid { grid-template-columns: 1fr; }
@@ -432,6 +461,32 @@
     </div>
   </div>
   <div class="stripes" id="stripes-bottom"></div>
+</section>
+
+<!-- FEATURED EVENT (auto-hides after Oct 27, 2026) -->
+<section class="featured" id="featured-event">
+  <div class="featured-card">
+    <div class="featured-tag">Special event</div>
+    <div>
+      <div class="featured-date">Tuesday · Oct 27 · 6:30 PM</div>
+      <h2 class="featured-title">Five Nights at Freddy's <span>Halloween Trivia</span></h2>
+      <p class="featured-venue">AUM Beerhouse<small>12900 Main St, Garden Grove, CA</small></p>
+      <div class="featured-actions">
+        <a class="cta-btn" href="https://partiful.com/e/UYQ5sowL9bTw09XmGsKJ?c=NXJGWkhI" target="_blank" rel="noreferrer">RSVP →</a>
+        <div class="featured-socials">
+          <a href="https://www.instagram.com/aumbeerhouse/" target="_blank" rel="noreferrer">@aumbeerhouse</a> ·
+          <a href="https://www.instagram.com/ket.mkt/" target="_blank" rel="noreferrer">@ket.mkt</a>
+        </div>
+      </div>
+    </div>
+    <ul class="featured-list">
+      <li><strong>Teams:</strong> up to 6 players</li>
+      <li><strong>Prize:</strong> cash grand prize for the winners</li>
+      <li><strong>Entry:</strong> $6 cash to play · $5 in any Halloween costume · free to watch</li>
+      <li><strong>Menu:</strong> FNAF-themed all night</li>
+      <li><strong>After trivia:</strong> karaoke</li>
+    </ul>
+  </div>
 </section>
 
 <!-- SCHEDULE -->
@@ -543,6 +598,9 @@
   };
 
   const STRIPE_COLORS = ['#e02a2a','#ffcc2a','#1ca4a4','#ff7dae','#e02a2a','#ffcc2a'];
+
+  // hide the featured event once it has passed (local time, after Oct 27, 2026)
+  if (new Date() >= new Date(2026, 9, 28)) document.getElementById('featured-event').remove();
 
   // stripes
   ['stripes-top','stripes-bottom'].forEach((id, i) => {
