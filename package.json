@@ -1,0 +1,23 @@
+{
+  "name": "oc-trivia",
+  "version": "1.0.0",
+  "description": "A responsive web guide to pub trivia nights happening across South Orange County venues.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2spencer/oc-trivia"
+  },
+  "keywords": [
+    "trivia",
+    "orange-county",
+    "pub-quiz"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
