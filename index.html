@@ -452,9 +452,9 @@
         <div class="price-tag">
           <div class="price-tag-hole"></div>
           <div class="pt-eyebrow">EVERY WEEK</div>
-          <div class="pt-num">12</div>
+          <div class="pt-num" id="game-count">21</div>
           <div class="pt-label">GAMES ON THE BOARD</div>
-          <div class="pt-days">SUN · TUE · WED · THU</div>
+          <div class="pt-days">SUN · MON · TUE · WED · THU</div>
         </div>
       </div>
     </div>
@@ -615,6 +615,9 @@
 
   // hide the featured event once it has passed (local time, after Oct 27, 2026)
   if (new Date() >= new Date(2026, 9, 28)) document.getElementById('featured-event').remove();
+
+  // keep the hero counter in sync with the schedule
+  document.getElementById('game-count').textContent = SCHEDULE.length;
 
   // stripes
   ['stripes-top','stripes-bottom'].forEach((id, i) => {
