@@ -12,7 +12,6 @@ A responsive web guide to pub trivia nights happening across South Orange County
 ## Venues
 
 Browse trivia nights at:
-- High Tide Coffee (Laguna Niguel)
 - OC Local Taproom
 - Selma's Chicago Pizzeria
 - Wigz Sandwich Shop

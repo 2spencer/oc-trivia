@@ -544,7 +544,7 @@
     </div>
     <div>
       <h3 style="color: var(--navy); font-weight: 700; margin-bottom: 12px;">21 Weekly Games Every Week</h3>
-      <p>Whether you're searching for "trivia near me" or planning your week, we've got you covered. Browse trivia by day — find Sunday game nights, Monday matchups, Tuesday pub quizzes, Wednesday competitions, and Thursday matches. Each venue hosts different trivia formats and prize options.</p>
+      <p>Whether you're searching for "trivia near me" or planning your week, we've got you covered. Browse trivia by day — find Monday matchups, Tuesday pub quizzes, Wednesday competitions, and Thursday matches. Each venue hosts different trivia formats and prize options.</p>
     </div>
     <div>
       <h3 style="color: var(--navy); font-weight: 700; margin-bottom: 12px;">Top Trivia Hosts in Orange County</h3>
@@ -565,7 +565,6 @@
 
 <script>
   const SCHEDULE = [
-    { day:'Sunday',    venue:'High Tide Coffee',          city:'Laguna Niguel',          time:'4:00 PM',  host:'Thinky Drinky Trivia', href:'https://www.instagram.com/hightidecoffeeco/' },
     { day:'Tuesday',   venue:'OC Local Taproom',          city:'Laguna Niguel',          time:'6:30 PM',  host:'Thinky Drinky Trivia', href:'https://www.instagram.com/oclocaltaproom/' },
     { day:'Monday',    venue:'Three Stags Irish Pub',    city:'Laguna Beach',           time:'Time TBC', host:'Host TBC',             href:'https://amp.eventbrite.com/d/ca--laguna-beach/trivia/?page=4' },
     { day:'Tuesday',   venue:'Station Craft',             city:'Dana Point',             time:'7:00 PM',  host:'Venue-run',            href:'https://stationcraft.com' },
@@ -595,7 +594,7 @@
 
   const HOSTS = [
     { name:'Savage Trivia',         blurb:'Laguna Beer Co. Laguna Beach (Tues 7 PM). New to the OC trivia scene!',                 url:'savagetrivia',           href:'https://www.instagram.com/savagetrivia/',              tint:'#e02a2a', fg:'#fff4d6', rot:1    },
-    { name:'Thinky Drinky',         blurb:'QR code format. OC Local Taproom (Tues) + High Tide Coffee (Sun). Prizes for 1st–3rd.',  url:'thinkydrinkytrivia.com', href:'https://www.thinkydrinkytrivia.com',                   tint:'#ffcc2a', fg:'#1b1a3a', rot:-1   },
+    { name:'Thinky Drinky',         blurb:'QR code format. OC Local Taproom (Tues). Prizes for 1st–3rd.',  url:'thinkydrinkytrivia.com', href:'https://www.thinkydrinkytrivia.com',                   tint:'#ffcc2a', fg:'#1b1a3a', rot:-1   },
     { name:'King Trivia',           blurb:'Wigz Laguna Beach (Tues) + Dry Society Mission Viejo (Thurs).',                          url:'kingtrivia.com',         href:'https://kingtrivia.com',                               tint:'#1ca4a4', fg:'#fff4d6', rot:0.5  },
     { name:'Geeks Who Drink',       blurb:"Selma's RSM (Tues) + Left Coast SC (Wed). Classic 8-round pub format.",                  url:'geekswhodrink.com',      href:'https://www.geekswhodrink.com',                        tint:'#ff7dae', fg:'#1b1a3a', rot:-0.5 },
     { name:'DJ Trivia',             blurb:"Gibroni's Pizza San Clemente (Tues 7 PM). Win prizes!",                                  url:'djtrivia.com',           href:'https://www.djtrivia.com',                             tint:'#e02a2a', fg:'#fff4d6', rot:1    },
@@ -632,7 +631,7 @@
 
   // schedule
   const schedGrid = document.getElementById('schedule-grid');
-  ['Sunday','Monday','Tuesday','Wednesday','Thursday'].forEach(day => {
+  ['Monday','Tuesday','Wednesday','Thursday'].forEach(day => {
     const games = SCHEDULE.filter(s => s.day === day);
     const b = DAY_BADGE[day];
     const group = document.createElement('div');
